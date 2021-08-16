@@ -1,5 +1,18 @@
 from datetime import date
 from datetime import timedelta
+import lxml
+import requests
+from bs4 import BeautifulSoup
+
+url = 'http://eldoradio.ru/playlist/2021/08/16/17:00'
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'lxml')
+quotes = soup.find_all('span', class_='title')
+
+for name in quotes:
+    print(name)
+
+
 
 today = date.today()
 
@@ -15,7 +28,7 @@ for i in range(days_take_away):
             url_for_parsing = url + "/0"+str(time) + ":00"
         else:
             url_for_parsing = url + "/"+str(time) + ":00"
-        print(url_for_parsing)
+        # print(url_for_parsing)
 # Генерируем адреса для парсинга
 # http://eldoradio.ru/playlist/2021/08/16/17:00
 
