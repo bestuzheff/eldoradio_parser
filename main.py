@@ -7,12 +7,12 @@ from bs4 import BeautifulSoup
 
 today = date.today()
 
-song_list = set()
+song_list = dict()
 
-songs_file = open('songs.txt', 'w')
+songs_file = open('songs.csv', 'w')
 
 # Указываем сколько дней отнять
-days_take_away = 1
+days_take_away = 200
 
 for i in range(days_take_away):
     new_day = today + timedelta(days=-i)
@@ -30,12 +30,14 @@ for i in range(days_take_away):
 
         for song_name in quotes:
             if song_name.string is not None:
-                song_list.add(song_name.string)
+                if song_name.string in song_list:
+                    song_list[song_name.string] += 1
+                else:
+                    song_list[song_name.string] = 1
 
 
 for song in song_list:
-    songs_file.write(song + '\n')
+    songs_file.write(song + " ; " + str(song_list[song]) + "\n")
 
 songs_file.close()
-
 print("Конец парсинга!")
