@@ -12,7 +12,7 @@ song_list = dict()
 songs_file = open('songs.csv', 'w')
 
 # Указываем сколько дней отнять
-days_take_away = 365
+days_take_away = 10
 
 for i in range(days_take_away):
     new_day = today + timedelta(days=-i)
